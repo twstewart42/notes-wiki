@@ -1,0 +1,1 @@
+root]# netstat -tapn | awk '{print $5}' | sed 's/::ffff://' | sed 's/:.*//' | sort | uniq -c | sort

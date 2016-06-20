@@ -311,7 +311,7 @@ Client receives response that task was completed, and exits
  &gt;
 </pre>
 <h2>Celery</h2>
-The <a href="http://docs.celeryproject.org/en/latest/index.html">celery plugin</a> allows for pluralization of task execution over many RabbitMQ nodes.
+The <a href="https://github.com/celery">celery plugin</a> allows for pluralization of task execution over many RabbitMQ nodes.
 <pre>#on all hosts
 &gt; pip install celery
 #on workere nodes

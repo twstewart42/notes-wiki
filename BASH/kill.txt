@@ -1,0 +1,13 @@
+root]# ps fax
+...
+ 7651 ? S 0:58 php script.php 538
+ 7656 ? S 0:57 php script.php 538
+ 7686 ? S 0:57 php script.php 538
+ 7690 ? S 0:57 php script.php 538
+ 7696 ? S 0:57 php script.php 538
+ 7700 ? S 0:57 php script.php 538
+ 7706 ? S 0:57 php script.php 538
+root]# /bin/ps fax | /bin/grep "script.php" | /bin/grep -v grep | /bin/awk '{ print $1 }' | wc -l
+127
+root]# /bin/kill -9 `<code>/bin/ps fax | /bin/grep "script.php" | /bin/grep -v grep | /bin/awk '{ print $1 }'`
+
