@@ -1,0 +1,57 @@
+wanted to show multiple keys for indexing, great way to speed things up for an application.
+
+CREATE TABLE `downloaded_sources` (
+  `download_host` char(15) NOT NULL COMMENT 'The short name of the host that downloaded the data',
+  `data_source` varchar(25) NOT NULL COMMENT 'The source of the data',
+  `download_site` varchar(80) NOT NULL COMMENT 'The address of the site the data was downloaded from',
+  `download_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time that the data finished being downloaded',
+  `remote_file_size` bigint(20) NOT NULL COMMENT 'The size of the original file on the FTP host',
+  `remote_file_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time of the original file on the FTP host',
+  `remote_full_path` varchar(185) DEFAULT NULL COMMENT 'The full path to the original file on the FTP host',
+  `local_destination` varchar(185) DEFAULT NULL COMMENT 'The full path to the local file on the host',
+  `local_filename_format` varchar(185) NOT NULL COMMENT 'The format string used to create the local file name',
+  `stored_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The time the file was transferred from local storage to permanent storage',
+  `long_term_destination` varchar(185) DEFAULT NULL COMMENT 'The full path to the long term storage area',
+  `id_of_first_process` bigint(20) unsigned DEFAULT NULL COMMENT 'The Master Process ID to start with for processing',
+  `id_of_first_qa_process` bigint(20) unsigned DEFAULT NULL COMMENT 'The Master QA Process ID to start with',
+  `processed_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'The Time the data finished being processed',
+  `processed_state` smallint(6) DEFAULT '0' COMMENT 'The State of the processing of the data (See: available_data_processing_states)',
+  `time_of_issue` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Issue time of the data',
+  `download_state` smallint(6) DEFAULT '0' COMMENT 'The stat of the download (NEW, QA_PASS, QA_FAIL)',
+  `downloaded_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`downloaded_id`),
+  KEY `data_source` (`data_source`),
+  KEY `processed_state` (`processed_state`),
+  KEY `download_state` (`download_state`),
+  KEY `time_of_issue` (`time_of_issue`),
+  KEY `long_term_destination` (`long_term_destination`),
+  KEY `stored_time` (`stored_time`),
+  KEY `id_of_first_process` (`id_of_first_process`),
+  KEY `id_of_first_qa_process` (`id_of_first_qa_process`),
+  KEY `processed_time` (`processed_time`),
+  KEY `download_time` (`download_time`),
+  KEY `download_host` (`download_host`),
+  KEY `remote_file_time` (`remote_file_time`),
+  KEY `local_destination` (`local_destination`),
+  KEY `remote_full_path` (`remote_full_path`)
+) ENGINE=MyISAM AUTO_INCREMENT=3404061 DEFAULT CHARSET=latin1 COMMENT='Meta Data on Raw downloaded files' |
+
+Look at applications to see what they are querying most often to build "good" key indexes.
+
+CREATE TABLE `ftp_download_parameters` (
+  `source_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'An unique database assigned ID',
+  `data_source` varchar(25) NOT NULL COMMENT 'A short descriptive name of where the data came from. Will also be a source in the zedx_sources table.',
+  `ftp_site` varchar(80) NOT NULL COMMENT 'The FTP address of the site',
+  `login_name` varchar(32) NOT NULL COMMENT 'The login name of the user for the site',
+  `login_passwd` varchar(32) NOT NULL COMMENT 'The login password of the user',
+  `ftp_base_dir` varchar(132) NOT NULL COMMENT 'The top most directory to start looking for data. It is from this location that directories will be traversed to find files of interest.',
+  `ftp_base_dir_filter` varchar(132) NOT NULL COMMENT 'A valid ''ls'' pattern string to limit the sub-directories that are searched for data files.',
+  `ftp_filename_format` varchar(132) DEFAULT NULL COMMENT 'A Regular Expressions string to be compared to file names to find the files we are interested in. Dates can have the following substitutions made: YYYY, MM, DD, HH.',
+  `ftp_time_format` varchar(132) DEFAULT NULL COMMENT 'A Regular Expressions string to be compared to file names to get the date of the data in the file. Directory paths can be added to get the required YYYY field. Optional MM, DD and HH fields are also handled.',
+  `local_base_dir` varchar(132) DEFAULT NULL COMMENT 'The local directory to store the data. Can use the YYYY, MM, DD, HH substitution to create date based directories.',
+  `local_filename_format` varchar(132) DEFAULT NULL COMMENT 'The format of the name of the local files. Can use the YYYY, MM, DD, HH substitution to create date based file names.',
+  `local_filename_substitution` varchar(132) DEFAULT NULL COMMENT 'Substitution to be made to the local file name. If not needed, should be left to default to NULL.',
+  PRIMARY KEY (`source_id`,`data_source`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Information needed to download data from an FTP site'
+
+
