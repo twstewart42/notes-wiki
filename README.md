@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # notes-wiki
 Notes on different projects I have worked on 
 
