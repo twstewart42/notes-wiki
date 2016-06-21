@@ -1,20 +1,18 @@
 <h1>SVN</h1>
 <blockquote>
 The goal of the Subversion project is to build a version control system that is a compelling replacement for CVS in the open source community.
-<ref>http://subversion.tigris.org/</ref>
 </blockquote>
 
-A Subversion server is provided for use with ZedX projects: http://svn.example.com/svn/.  
 
-; HTTP/HTTPS access  
-: Access to the Subversion server is provided via the HTTP protocol, *not* the svn protocol.  
-; LDAP authentication
-: Only authenticated users can access the Subversion server.  Authentication is provided by a LDAP server.  Access is restricted to members of the <code>svn</code> group.  
+; HTTP/HTTPS access    
+: Access to the Subversion server is provided via the HTTP protocol, *not* the svn protocol.    
+; LDAP authentication  
+: Only authenticated users can access the Subversion server.  Authentication is provided by an LDAP server.  Access is restricted to members of the <code>svn</code> group.    
 
 
 <h2>Links</h2>
-*[https://tortoisesvn.net/ TortoiseSVN] - GUI SVN interface for Windows.
-*[[Wikipedia:Apache Subversion]]
+<a href=https://tortoisesvn.net/>TortoiseSVN</a> - GUI SVN interface for Windows.  
+<a href=https://subversion.apache.org/>Apache Subversion</a>
 
 
 <h2>Access and Use</h2>
@@ -166,7 +164,7 @@ svn update
 
 <h3>If it breaks beta: </h3>
 cd /var/www/projectname/html  
-svn up -r 1234 # rolls back to same [http://blog.ekini.net/2008/04/30/svn-revert-to-a-previous-revision-after-a-wrong-update/ revision] number as listed when you ran svn status  
+svn up -r 1234 # rolls back to same <a href=http://blog.ekini.net/2008/04/30/svn-revert-to-a-previous-revision-after-a-wrong-update/> revision</a> number as listed when you ran svn status  
 
 
 
