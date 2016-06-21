@@ -126,7 +126,7 @@ LDAPVerifyServerCert off
         SVNParentPath /var/www/svn
         SVNListParentPath on
         SVNIndexXSLT /svnindex.xsl
-        Require host bfesysutl004.example.com
+        Require host svnhostname.example.com
         #SSLRequireSSL
    AuthType Basic
    AuthName "Subversion repositories"
