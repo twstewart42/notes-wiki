@@ -18,7 +18,7 @@ One can see this all in play on ldb001, which masquerades the address for sqla00
   admin-address = ldb001.example.com:3336
   proxy-address = 10.0.X.Y:3306
   proxy-backend-addresses = 10.0.X.A:3306, 10.0.X.B:3306
-  #proxy-read-only-backend-addresses = 10.0.25.14:3306
+  #proxy-read-only-backend-addresses = 10.0.X.C:3306
   log-file=/var/log/mysql-proxy.log
   log-level=message
   plugins=proxy
