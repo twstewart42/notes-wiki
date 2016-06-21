@@ -52,7 +52,9 @@ thread_cache_size = 8
 table_cache = 64
 max_connections=450
 max_connect_errors=10000
-# Weather Replication
+
+
+#Replication
 server-id                               = 10
 log-bin                                 = mysql-bin
 log-slave-updates                       = 0
@@ -127,7 +129,7 @@ table_cache = 64
 max_connections=450
 max_connect_errors=10000
 
-#Weather Replication
+#Replication
 server-id                               = 20
 log-bin                                 = mysql-bin
 log_slave_updates                       = 0
