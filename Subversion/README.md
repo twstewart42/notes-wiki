@@ -1,20 +1,18 @@
 <h1>SVN</h1>
 <blockquote>
 The goal of the Subversion project is to build a version control system that is a compelling replacement for CVS in the open source community.
-<ref>http://subversion.tigris.org/</ref>
 </blockquote>
 
-A Subversion server is provided for use with ZedX projects: http://svn.example.com/svn/.  
 
-; HTTP/HTTPS access  
-: Access to the Subversion server is provided via the HTTP protocol, *not* the svn protocol.  
-; LDAP authentication
-: Only authenticated users can access the Subversion server.  Authentication is provided by a LDAP server.  Access is restricted to members of the <code>svn</code> group.  
+; HTTP/HTTPS access    
+: Access to the Subversion server is provided via the HTTP protocol, *not* the svn protocol.    
+; LDAP authentication  
+: Only authenticated users can access the Subversion server.  Authentication is provided by an LDAP server.  Access is restricted to members of the <code>svn</code> group.    
 
 
 <h2>Links</h2>
-*[https://tortoisesvn.net/ TortoiseSVN] - GUI SVN interface for Windows.
-*[[Wikipedia:Apache Subversion]]
+<a href=https://tortoisesvn.net/>TortoiseSVN</a> - GUI SVN interface for Windows.  
+<a href=https://subversion.apache.org/>Apache Subversion</a>
 
 
 <h2>Access and Use</h2>
@@ -126,7 +124,7 @@ LDAPVerifyServerCert off
         SVNParentPath /var/www/svn
         SVNListParentPath on
         SVNIndexXSLT /svnindex.xsl
-        Require host bfesysutl004.example.com
+        Require host svnhostname.example.com
         #SSLRequireSSL
    AuthType Basic
    AuthName "Subversion repositories"
@@ -142,35 +140,31 @@ LDAPVerifyServerCert off
 </pre>
 
 <h2>Merge to Beta/Production</h2>
-It doesn't happen often, but sometimes a project's release must be expedited and it falls to Systems to do the release to beta. '''You must get a Signature from Joe R., or Brian A,  or Nate G., before doing this.'''
-Before you start get ticket number from lead developer, this should have the files you need to merge to beta. 
- 
-On dev:
-  Login as your username
+<h3>On dev:</h3>
+Login as your username
   cd /var/www/projectname/html
   svn commit example.php
-  continue with any other files that are listed in the ticket.
+  continue with any other files that need to be included in the release.
 
-On the ticket, the new commit and revision number should show up in list "Associated revisions"  
 
-On windows using tortoiseSVN:  
-  svn checkout http://svn.example.com/projectname
-  #if it is a new file 
-  in trunk ctrl-c to copy file, navigate to C:\SVN\projectname\release\beta\, right click in directory -> TortoiseSVN -> Paste (copies release history)
-  #if file already exists (most likely case):
-  go to release\beta, right click the file you want to update (example.php), TortoiseSVN -> merge, merge from trunk release if beta
-  svn commit
+<h3>On windows using tortoiseSVN: </h3> 
+svn checkout http://svn.example.com/projectname  
+if it is a new file   
+   in trunk ctrl-c to copy file, navigate to C:\SVN\projectname\release\beta\, right click in directory -> TortoiseSVN -> Paste (copies release history)  
+elif file already exists (most likely case):  
+   go to release\beta, right click the file you want to update (example.php), TortoiseSVN -> merge, merge from trunk release if beta  
+svn commit  
 
-On beta:  
-  Login as your username
-  cd /var/www/projectname/html
-  svn status # make note of revision number, so if you need to roll back that can be done much easier. Revision: 1234
-  svn update
-  # in most projects 'scripts' dir, there should be an executable to fix any permission conflicts to match the project's account.
+<h3>On beta:</h3>    
+Login as your username  
+cd /var/www/projectname/html  
+svn status # make note of revision number, so if you need to roll back that can be done much easier. Revision: 1234  
+svn update  
+  # in most projects 'scripts' dir, there should be an executable to fix any permission conflicts to match the project's account.  
 
-If it breaks beta:
-  cd /var/www/projectname/html
-  svn up -r 1234 # rolls back to same [http://blog.ekini.net/2008/04/30/svn-revert-to-a-previous-revision-after-a-wrong-update/ revision] number as listed when you ran svn status
+<h3>If it breaks beta: </h3>
+cd /var/www/projectname/html  
+svn up -r 1234 # rolls back to same <a href=http://blog.ekini.net/2008/04/30/svn-revert-to-a-previous-revision-after-a-wrong-update/> revision</a> number as listed when you ran svn status  
 
 
 
