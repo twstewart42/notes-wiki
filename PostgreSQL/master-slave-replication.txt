@@ -1,0 +1,62 @@
+PGSQL Master/Slave replication
+
+On master
+<pre>
+default_statistics_target = 100
+maintenance_work_mem = 240MB
+effective_cache_size = 2816MB
+work_mem = 3840kB
+wal_buffers = 16MB
+checkpoint_segments = 32
+shared_buffers = 960MB
+
+hot_standby = on
+wal_level = hot_standby
+max_wal_senders = 1
+checkpoint_segments = 16
+wal_keep_segments = 4000
+archive_mode = on
+archive_command = 'cp -f %p /var/lib/pgsql/data/archive/%f </dev/null'
+logging_collector = on
+log_filename = '%A.log'
+log_line_prefix = '%p %t '
+log_truncate_on_rotation = on
+log_statement = 'all'
+</pre>
+
+pg_hba.conf
+  host    replication     replicator      10.0.X.Y/32           md5
+  
+<h1>Slave config</h1>
+<h2>postgresql.conf</h2>
+<pre>
+default_statistics_target = 100
+maintenance_work_mem = 240MB
+effective_cache_size = 2816MB
+work_mem = 3840kB
+wal_buffers = 16MB
+checkpoint_segments = 32
+shared_buffers = 960MB
+
+hot_standby = on
+wal_level = hot_standby
+max_wal_senders = 1
+checkpoint_segments = 16
+wal_keep_segments = 4000
+archive_mode = on
+archive_command = 'cp -f %p /var/lib/pqsql/data/archive/%f </dev/null'
+logging_collector = on
+log_filename = '%A.log'
+log_line_prefix = '%p %t '
+log_truncate_on_rotation = on
+log_statement = 'all'
+</pre>
+
+<h2>recovery.conf</h2>
+<pre>
+standby_mode = 'on'
+primary_conninfo = 'host=10.0.X.Y port=5432 user=replicator password=******'
+trigger_file = '/tmp/postgresql.trigger'
+</pre>
+
+make pg_hba same as master server.
