@@ -1,0 +1,26 @@
+$minGbThreshold = 5;
+$computers = "winserver01.example.com";
+$smtpAddress = "intmail.example.com";
+$toAddress = "pagers@example.com, systems@example.com";
+$fromAddress = "windiskalerts@example.com";
+foreach($computer in $computers)
+{    
+    $disks = Get-WmiObject -ComputerName $computer -Class Win32_LogicalDisk -Filter "DriveType = 3";
+    $computer = $computer.toupper();
+    $deviceID = $disk.DeviceID;
+    foreach($disk in $disks)
+    {
+        $freeSpaceGB = [Math]::Round([float]$disk.FreeSpace / 1073741824, 2);
+	$totalSpaceGB = [Math]::Round([float]$disk.size / 1073741824, 2);
+        if($freeSpaceGB -lt $minGbThreshold)
+        {
+            $smtp = New-Object Net.Mail.SmtpClient($smtpAddress)
+            $msg = New-Object Net.Mail.MailMessage
+            $msg.To.Add($toAddress)
+            $msg.From = $fromAddress
+            $msg.Subject = “Diskspace below threshold ” + $computer + "\" + $disk.DeviceId
+            $msg.Body = $computer + " \" + $disk.DeviceId + " " + $freeSpaceGB + "GB Remaining out of " + $totalSpaceGB +"GB total";
+            $smtp.Send($msg)
+        }
+    }
+}
