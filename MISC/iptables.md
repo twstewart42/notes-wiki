@@ -1,19 +1,24 @@
- yum install system-config-firewall-tui |installed by default in centos 5/yum6 but not centos 7
+# IPtables
+ 
+  yum install system-config-firewall-tui 
+installed by default in centos 5/yum6 but not centos 7
 
-Setup -> firewall is the easiest way if you don't remember iptable rules easily
+  $ setup; -> firewall 
+is the easiest way if you don't remember iptable rules easily
 
 Or 
-iptables -nL --line-numbers
+  $ iptables -nL --line-numbers
 
-iptables -I INPUT {LINE_NUMBER} -i eth1 -p tcp --dport 21 -s 123.123.123.123 -j ACCEPT -m comment --comment "This rule is here for this reason"
+  $ iptables -I INPUT {LINE_NUMBER} -i eth1 -p tcp --dport 21 -s 123.123.123.123 -j ACCEPT -m comment --comment "This rule is here for this reason"
 
-From <https://snipt.net/johan_adriaans/insert-an-iptables-rule-on-a-specific-line-number-with-a-comment-and-restore-all-rules-after-reboot/> 
+From https://snipt.net/johan_adriaans/insert-an-iptables-rule-on-a-specific-line-number-with-a-comment-and-restore-all-rules-after-reboot/> 
 
 Example below for postgres add one for each service that needs access; 80, 443, 22, 3306, 389, 636, 5432, and others that may be necessary in a case by case basis
 
-iptables -I INPUT 5 -i eth0 -p tcp --dport 5432 -j ACCEPT
+  $ iptables -I INPUT 5 -i eth0 -p tcp --dport 5432 -j ACCEPT
 
 All rules should be saved by centOS in /etc/sysconfig/iptables
+<pre>
 ]# cat /etc/sysconfig/iptables
 #iptables-save v1.4.7 on Tue May  5 09:36:53 2015
 *filter
@@ -39,7 +44,9 @@ All rules should be saved by centOS in /etc/sysconfig/iptables
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 # Completed on Tue May  5 09:36:53 2015
+</pre>
 
--A OUTPUT -p tcp --dport 22 -j DROP # drops ssh FROM the server
+Special rule to disallow ssh from publicly available servers
+  -A OUTPUT -p tcp --dport 22 -j DROP # drops ssh FROM the server
 
 
