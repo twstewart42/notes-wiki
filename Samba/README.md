@@ -15,7 +15,7 @@ Samba is an important component to seamlessly integrate Linux/Unix Servers and D
 ## Installation
 All of this was done on a standard CentOS 7 install.
 
-  yum install samba-4.1 samba-client samba-common samba-libs
+    yum install samba-4.1 samba-client samba-common samba-libs
     
 
 Make the smb.conf match the following settings
@@ -51,7 +51,7 @@ A single example of a smb/cifs share is below
         directory mask = 0777
 </pre>
 Users must exist in the local /etc/group file for permissions to work correctly. 
-   gpasswd -a usern123 documentation
+    gpasswd -a usern123 documentation
 
 Any changes and there must be a full service restart, a reload does not appear to do anything. It took me a long time to realize this
   systemctl restart smb
@@ -83,14 +83,14 @@ There seems to be some protocol mismatch that causes windows 10 to not be able t
 
 Open power shell as an admin, execute the next 2 lines  
   
-  sc.exe config lanmanworkstation depend= bowser/mrxsmb10/nsi
-  sc.exe config mrxsmb20 start= disabled
+    sc.exe config lanmanworkstation depend= bowser/mrxsmb10/nsi
+    sc.exe config mrxsmb20 start= disabled
   
 Restart the machine, then test if the user/machine can access the shared samba drive
 
 ## Adding Users
 The user must exist in AD and on ldap01. They should also be added to the local "Domain Users" group and any other groups that are pertinent to their job.
 
-  gpasswd -a usern123 "Domain Users"
+    gpasswd -a usern123 "Domain Users"
 
 
