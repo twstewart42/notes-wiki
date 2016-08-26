@@ -1,14 +1,7 @@
-<div id="content" role="main">
+<h1> GlusterFS </h1>
 
-				
-					
-<article id="post-1080" class="post-1080 page type-page status-publish hentry">
-	<header class="entry-header">
-		<h1 class="entry-title">GlusterFS</h1>
-	</header><!-- .entry-header -->
+My experience attempting to use commodity hardware across mixed disc types (HDD &amp; SSD) to attempt creating a very fast and also very deep storage solution. I was able to get everything setup correctly, I just wish I had a faster network(10 GiB) for data replication and spanning. In Practice I have ran into issues where if many machines are attempting to write to the same volume things slow down really badly, this could be the very old hardware I setup this demo on, or an issue with <a href="https://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/">GlusterFS</a> but I do not have the resources to further test this setup. I&#8217;ll show what I setup and some of the issues that occurred on my journey in understanding <a href="http://www.gluster.org/community/documentation/index.php/HowTo">GlusterFS</a>. Understand that there are many, many (like 10) different ways to setup GlusterFS with different replication, striping, spanning, arbiters, etc settings, and I may have built it in a way that made sense for this project but not necessary what might be the way for everyone out there.
 
-	<div class="entry-content">
-		<p>My experience attempting to use commodity hardware across mixed disc types (HDD &amp; SSD) to attempt creating a very fast and also very deep storage solution. I was able to get everything setup correctly, I just wish I had a faster network(10 GiB) for data replication and spanning. In Practice I have ran into issues where if many machines are attempting to write to the same volume things slow down really badly, this could be the very old hardware I setup this demo on, or an issue with <a href="https://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/">GlusterFS</a> but I do not have the resources to further test this setup. I&#8217;ll show what I setup and some of the issues that occurred on my journey in understanding <a href="http://www.gluster.org/community/documentation/index.php/HowTo">GlusterFS</a>. Understand that there are many, many (like 10) different ways to setup GlusterFS with different replication, striping, spanning, arbiters, etc settings, and I may have built it in a way that made sense for this project but not necessary what might be the way for everyone out there.</p>
 <h1><span id="Distributed-Replicate" class="mw-headline">Distributed-Replicate</span></h1>
 <p>Originally I had the idea of creating 2 machines with HDD and 2 machines with SSD, but it turns out that it is wise to have arbiters for each sub grouping of disks so that one can avoid split brain issues should one of the nodes in the group go down. An <a href="https://gluster.readthedocs.io/en/latest/Administrator%20Guide/arbiter-volumes-and-quorum/">Arbiter</a> only stores meta data and file structure not the actual data so they can be sized much smaller. As in <strong>ANY CLUSTER</strong> there must be an <strong>odd</strong> number of nodes to correctly handle failures.</p>
 <pre>-glusterFS cluster physical layout
