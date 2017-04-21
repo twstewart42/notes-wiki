@@ -1,9 +1,7 @@
-<header class="entry-header">
-		<h1 class="entry-title">bashrc</h1>
-	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<p>Some parts of my bashrc file that I use to alias simple keystrokes into very powerful commands. Some I have borrowed from examples online. I use a mix of special functions and aliases to help increase my speed when trying to figure out an issue.</p>
+<h1>bashrc</h1>
+
+<p>Some parts of my bashrc file that I use to alias simple keystrokes into very powerful commands. Some I have borrowed from examples online. I use a mix of special functions and aliases to help increase my speed when trying to figure out an issue.</p>
 <h2>ENV</h2>
 <p>Setup basic user env information to help inform commonly used programs, paths, etc.</p>
 <pre>export SVN_EDITOR=vim
