@@ -1,9 +1,5 @@
-<header class="entry-header">
-		<h1 class="entry-title">BASH</h1>
-	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<h1>One Liners and Snippets</h1>
+<h1>One Liners and Snippets</h1>
 <p>Run a task, but be alerted if it fails</p>
 <pre>#!/bin/sh
 yell() { echo "$0: $*" &gt;&amp;2; echo "$@ failed with exit code $?"| \
@@ -43,7 +39,7 @@ root]# find . -type f -mmin +720 -delete  # find and delete anything over 12 hou
 <h2>RSYNC</h2>
 <p>see the <a href="https://twstewart84.wordpress.com/systems-administration/python-snippets/">python version here</a>, which runs much better and lighter on resources</p>
 <pre>#!/bin/bash
-#rsync from random CentOS repos, in order to host a mirror of CentOS repos
+# rsync from random CentOS repos, in order to host a mirror of CentOS repos
 # can be done the same with epel, just change mirror_list and output
 # array of geologicaly close CentOS mirrors to pull from
 mirror_list=(rsync://mirror.us.oneandone.net/centos/ rsync://mirror.cs.pitt.edu/centos/ rsync://mirrors-pa.sioru.com/CentOS/ rsync://mirror.itc.virginia.edu/centos/ rsync://mirror.clarkson.edu/centos rsync://mirror.vcu.edu/centos/ rsync://mirror.umd.edu/centos/ )
