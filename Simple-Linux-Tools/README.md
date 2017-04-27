@@ -32,7 +32,7 @@ If you are ever unsure of what a command does man pages are the way to locally r
         that are down.  Otherwise, it configures an interface.
   <b>there is much more to this document in full</b>
 </pre>
-<h1><span id=".2Fvar.2Flog.2Fmessages" class="mw-headline">/var/log/messages</span></h1>
+<h1><span id=".2Fvar.2Flog.2Fmessages" class="mw-headline">/var/log/messages or /var/log/syslog</span></h1>
 /var/log/messages is the default catch-all for any system errors that may be occurring. There are sometimes logs setup for specific services. Always try to see if a specific service has its own log file or directory (httpd,cron,secure,php-fpm,mysql,postgresql) and if it does not exist or is empty, check /var/log/messages it will probably have the errors, warning, INFO, emergencies, kernel panics, and any other frightening logs that you need to resolve any issues that may occur.
 
 If you have checked both the service log and /var/log/messages and still cannot find any information about the service you are trying to fix, you may have to enable debugging mode(s) or level(s) on the service itself. This is different for all services and can usually be found in the products documentation.
