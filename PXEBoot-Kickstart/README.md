@@ -198,8 +198,8 @@ ftp
 <p>You can automate things even further by creating bash like commands in the %post section of the kickstart script</p>
 <h2><span id="Prd_Web_Post_Install" class="mw-headline">Prd Web Post Install</span></h2>
 <p>The CentOS basic install pretty much stays the same for each server. Below is the post installation script which has been massively altered to set things up with <a title="Mapserver" href="http://mapserver.org/introduction.html">MapServer</a> and all of our required dependencies. I will add comments to help explain why I have set this up the way they are.</p>
-<pre> 
 
+```
 %post
 
 # add another nameserver
@@ -207,7 +207,7 @@ echo "nameserver 10.0.0.D1" &gt;&gt; /etc/resolv.conf
 echo "nameserver 10.0.0.D2" &gt;&gt; /etc/resolv.conf
 
 ##Begin setup of mapserver
-```
+
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 cd /opt; wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh /opt/epel-*.rpm
@@ -349,11 +349,11 @@ cd /opt/; wget -O- https://s3.amazonaws.com/cfengine.packages/quick-install-cfen
 %end
 reboot
 ```
-</pre>
+
 <h2><span id="Prd_SQL_Post_Install" class="mw-headline">Prd SQL Post Install</span></h2>
 <p>Installes a <a href="https://www.postgresql.org/">PostgreSQL</a> server with <a href="http://postgis.net/">PostGIS</a></p>
 <p>kickstart.example.com/kickstart/CentOS6_prdsql.ks</p>
-<pre>
+
 ```
 %post
 
@@ -464,5 +464,5 @@ cd /opt/; wget -O- https://s3.amazonaws.com/cfengine.packages/quick-install-cfen
 %end
 reboot
 ```
-</pre>
+
 </div>
