@@ -1,14 +1,6 @@
-<div id="content" role="main">
 
-				
-					
-<article id="post-306" class="post-306 page type-page status-publish hentry">
-	<header class="entry-header">
-		<h1 class="entry-title">Kickstart</h1>
-	</header><!-- .entry-header -->
+<h1 class="entry-title">Kickstart</h1>
 
-	<div class="entry-content">
-		<p><!-- start content --></p>
 <div id="mw-content-text" class="mw-content-ltr" dir="ltr" lang="en">
 <blockquote><p>Kickstart installations offer a means to automate the installation process, either partially or fully. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone you want the system to use, how the drives should be partitioned, or which packages should be installed. Providing a prepared Kickstart file when the installation begins therefore allows the you to perform the installation automatically, without need for any intervention from the user.</p></blockquote>
 <dl>
@@ -67,7 +59,7 @@ adduser kickstart -s /sbin/nologin
 passwd kickstart
 
 </pre>
-<p>I have also made the kickstart files available over http at<b> <a class="external free" href="http://bfesysutl003.zedxinc.com/kickstart/" rel="nofollow">http://kickstart.example.com/kickstart/</a></b></p>
+
 <p>make directories and copy pxe boot files</p>
 <pre>mkdir /tftpboot
 cp /usr/share/syslinux/pxelinux.0 /tftpboot/
@@ -215,7 +207,7 @@ echo "nameserver 10.0.0.D1" &gt;&gt; /etc/resolv.conf
 echo "nameserver 10.0.0.D2" &gt;&gt; /etc/resolv.conf
 
 ##Begin setup of mapserver
-
+```
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 cd /opt; wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh /opt/epel-*.rpm
@@ -265,7 +257,7 @@ EOT
 #run ftp.sh shell script
 /opt/ftp.sh
 
-#they changed how to configure mapserver from 6.2 to 6.4 now you must use cmake instead of .configure and all those options like eric's documentation.
+
 
 cd /opt/mapserver-6.4.1;
 cp -rf /opt/CMakeLists.txt /opt/mapserver-6.4.1/CMakeLists.txt
@@ -356,11 +348,14 @@ cd /opt/; wget -O- https://s3.amazonaws.com/cfengine.packages/quick-install-cfen
 
 %end
 reboot
+```
 </pre>
 <h2><span id="Prd_SQL_Post_Install" class="mw-headline">Prd SQL Post Install</span></h2>
 <p>Installes a <a href="https://www.postgresql.org/">PostgreSQL</a> server with <a href="http://postgis.net/">PostGIS</a></p>
 <p>kickstart.example.com/kickstart/CentOS6_prdsql.ks</p>
-<pre>%post
+<pre>
+```
+%post
 
 # add another nameserver
 echo "nameserver 10.0.0.D1" &gt;&gt; /etc/resolv.conf
@@ -468,5 +463,6 @@ cd /opt/; wget -O- https://s3.amazonaws.com/cfengine.packages/quick-install-cfen
 
 %end
 reboot
+```
 </pre>
 </div>
